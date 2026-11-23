@@ -5,15 +5,15 @@ import {
   Body,
   Param,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Task, TaskDocument } from './schemas/task.schema';
-import { User, UserDocument } from '../users/schemas/user.schema';
-import { TasksService } from './tasks.service';
-import { CreateTaskDto } from './dto/CreateTaskDto';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Task, TaskDocument } from "./schemas/task.schema";
+import { User, UserDocument } from "../users/schemas/user.schema";
+import { TasksService } from "./tasks.service";
+import { CreateTaskDto } from "./dto/CreateTaskDto";
 
-@Controller('tasks')
+@Controller("tasks")
 export class TasksController {
   constructor(
     @InjectModel(Task.name) private readonly taskModel: Model<TaskDocument>,
@@ -38,8 +38,8 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
-  @Get(':id')
-  async findById(@Param('id') id: string) {
+  @Get(":id")
+  async findById(@Param("id") id: string) {
     return this.tasksService.findById(id);
   }
 }
