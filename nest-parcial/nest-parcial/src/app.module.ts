@@ -1,15 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { TasksModule } from './tasks/tasks.module';
-import { AuthMiddleware } from './auth.middleware';
+import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { UsersModule } from "./users/users.module";
+import { TasksModule } from "./tasks/tasks.module";
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/nest-parcial',
+      process.env.MONGODB_URI || "mongodb://localhost:27017/nest-parcial",
     ),
     UsersModule,
     TasksModule,
@@ -17,8 +16,4 @@ import { AuthMiddleware } from './auth.middleware';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('tasks');
-  }
-}
+export class AppModule {}
