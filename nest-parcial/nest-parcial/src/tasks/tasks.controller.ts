@@ -1,13 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  UseGuards,
-  NotFoundException,
-} from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, UseGuards } from "@nestjs/common";
 import { TasksService } from "./tasks.service";
+import { CreateTaskDto } from "./dto/CreateTaskDto";
 import { AuthGuard } from "../auth.guard";
 
 @Controller("tasks")
@@ -16,7 +9,7 @@ export class TasksController {
 
   @Post()
   @UseGuards(AuthGuard)
-  async create(@Body() payload: any) {
+  async create(@Body() payload: CreateTaskDto) {
     return this.tasksService.create(payload);
   }
 
